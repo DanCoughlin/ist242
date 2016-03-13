@@ -5,6 +5,8 @@
  */
 package airplaneseatingviewer;
 // NOTE: necessary packages imported
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -102,13 +104,19 @@ public class AirplaneSeatingFrame extends JFrame {
         button = new JButton("Find Seats");
         ActionListener listener = new FindSeatListener();
         button.addActionListener(listener);
-  
+        
         JPanel panel = new JPanel();
-        panel.add(label);
-        panel.add(createClassChoice());
-        panel.add(createSeatingChoice());
-        panel.add(createPassengerSelection(3));
-        panel.add(button);
+        panel.setLayout(new BorderLayout());
+        panel.add(label, BorderLayout.NORTH);
+        
+        JPanel formPanel = new JPanel();
+        formPanel.setLayout(new GridLayout(3,1));
+        formPanel.add(createClassChoice());
+        formPanel.add(createSeatingChoice());
+        formPanel.add(createPassengerSelection(3));
+        panel.add(formPanel, BorderLayout.CENTER);
+        
+        panel.add(button, BorderLayout.SOUTH);
         add(panel);
     }
 }
