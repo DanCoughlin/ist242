@@ -46,8 +46,7 @@ public class AirplaneSeatingFrame extends JFrame {
     private JRadioButton centerSeat;
     private JRadioButton aisleSeat;
     private JComboBox passengerCombo;
-    private JTextField myTextField;
-    private JTextArea myTextArea;
+    private ButtonGroup buttonGroup;
     
     public AirplaneSeatingFrame() {
         // NOTE: helper method to create components
@@ -61,6 +60,9 @@ public class AirplaneSeatingFrame extends JFrame {
             passengerCombo.removeAllItems();
             int numPass;
             if (firstClass.isSelected()) {
+                if(centerSeat.isSelected()) {
+                    buttonGroup.clearSelection();
+                }
                 centerSeat.setEnabled(false);
                 numPass = FIRST_CLASS_PASSENGERS;
             }
@@ -89,10 +91,10 @@ public class AirplaneSeatingFrame extends JFrame {
         aisleSeat = new JRadioButton("Aisle");
         centerSeat = new JRadioButton("Center");
         
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(windowSeat);
-        bg.add(aisleSeat);
-        bg.add(centerSeat);
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(windowSeat);
+        buttonGroup.add(aisleSeat);
+        buttonGroup.add(centerSeat);
         
         JPanel jp = new JPanel();
         jp.add(windowSeat);
