@@ -30,6 +30,7 @@ import javax.swing.JTextArea;
 public class AirplaneSeatingFrame extends JFrame {
     
     // NOTE: our instance variables to store components
+    private JPanel formPanel;
     private JButton button;
     private JLabel label;
     
@@ -55,9 +56,25 @@ public class AirplaneSeatingFrame extends JFrame {
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
     }
     
+    class FirstClassClickListener implements ActionListener {
+        public void actionPerformed(ActionEvent event) {
+            // you could accomplish this in one line without branching:
+            // centerSeat.setEnabled(!firstClass.isSelected());
+            // I think the one line may be difficult to read and understand
+            if (firstClass.isSelected()) {
+                centerSeat.setEnabled(false);
+            }
+            else {
+                centerSeat.setEnabled(true);
+            }
+        }
+    }
+    
     public JPanel createClassChoice() {
         JPanel jp = new JPanel();
         firstClass = new JCheckBox("First Class");
+        ActionListener listener = new FirstClassClickListener();
+        firstClass.addActionListener(listener);
         jp.add(firstClass);
         jp.setBorder(new TitledBorder(new EtchedBorder(), "Class"));
         return jp;
@@ -109,11 +126,11 @@ public class AirplaneSeatingFrame extends JFrame {
         panel.setLayout(new BorderLayout());
         panel.add(label, BorderLayout.NORTH);
         
-        JPanel formPanel = new JPanel();
+        formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(3,1));
         formPanel.add(createClassChoice());
         formPanel.add(createSeatingChoice());
-        formPanel.add(createPassengerSelection(3));
+        formPanel.add(createPassengerSelection(ECONOMY_CLASS_PASSENGERS));
         panel.add(formPanel, BorderLayout.CENTER);
         
         panel.add(button, BorderLayout.SOUTH);
