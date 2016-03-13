@@ -58,14 +58,18 @@ public class AirplaneSeatingFrame extends JFrame {
     
     class FirstClassClickListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
-            // you could accomplish this in one line without branching:
-            // centerSeat.setEnabled(!firstClass.isSelected());
-            // I think the one line may be difficult to read and understand
+            passengerCombo.removeAllItems();
+            int numPass;
             if (firstClass.isSelected()) {
                 centerSeat.setEnabled(false);
+                numPass = FIRST_CLASS_PASSENGERS;
             }
             else {
                 centerSeat.setEnabled(true);
+                numPass = ECONOMY_CLASS_PASSENGERS;
+            }
+            for(int i=1; i <= numPass; i++) {
+                passengerCombo.addItem(i);
             }
         }
     }
